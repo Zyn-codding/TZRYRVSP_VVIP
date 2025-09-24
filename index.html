@@ -5,163 +5,146 @@
   <title>TZRYRVSP VVIP</title>
   <style>
     body {
-      background-color: black;
-      color: red;
-      font-family: Arial, sans-serif;
-      text-align: center;
       margin: 0;
       padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #000;
+      color: #fff;
     }
-    h1 {
-      color: blue;
-      margin-top: 20px;
+
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
     }
-    .rainbow {
+
+    h1.title {
+      font-size: 22px;
       font-weight: bold;
-      animation: rainbow 3s infinite;
+      color: #6a5acd;
+      margin-bottom: 20px;
     }
-    @keyframes rainbow {
-      0% {color: red;}
-      20% {color: orange;}
-      40% {color: yellow;}
-      60% {color: green;}
-      80% {color: blue;}
-      100% {color: violet;}
-    }
-    .container {
-      margin-top: 50px;
-    }
-    input, select, button {
-      margin: 10px;
-      padding: 10px;
-      font-size: 16px;
-    }
-    .hidden {
-      display: none;
-    }
-    .popup {
-      position: fixed;
-      top: 30%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #222;
-      border: 2px solid red;
+
+    .login-box, .main-box {
+      background: #111;
+      border: 2px solid #6a0dad;
+      border-radius: 12px;
       padding: 20px;
-      color: red;
-      z-index: 1000;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 15px #8000ff;
     }
-    .loading {
-      margin-top: 10px;
-      font-size: 14px;
-      color: orange;
+
+    .login-box input, .main-box input, .main-box select {
+      width: 90%;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #6a0dad;
+      border-radius: 8px;
+      background: #000;
+      color: #fff;
+      text-align: center;
+      outline: none;
     }
-    .close-btn {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: red;
-      color: white;
+
+    .btn {
+      background: #6a0dad;
       border: none;
-      padding: 5px 10px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
       cursor: pointer;
+      margin-top: 10px;
+      transition: 0.2s;
     }
-    .note {
-      margin-top: 20px;
-      font-size: 14px;
-      color: red;
+
+    .btn:hover {
+      background: #9932cc;
+    }
+
+    .profile {
+      margin-bottom: 20px;
+    }
+
+    .profile img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #6a0dad;
+      margin-bottom: 10px;
+    }
+
+    .small-text {
+      font-size: 12px;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <h1>TZRYRVSP VVIP</h1>
-  <p class="rainbow">DEVELOPERS ZYN</p>
-
-  <!-- Login Section -->
-  <div id="loginSection" class="container">
-    <input type="text" id="username" placeholder="USERNAME"><br>
-    <input type="password" id="password" placeholder="PASSWORD"><br>
-    <button onclick="login()">LOGIN</button>
+  <div class="center" id="login-page">
+    <h1 class="title">TZRYRVSP VVIP</h1>
+    <div class="login-box">
+      <div class="profile">
+        <img src="https://i.ibb.co/0s8sq0f/avatar.png" alt="avatar">
+      </div>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button class="btn" onclick="login()">LOGIN</button>
+    </div>
   </div>
 
-  <!-- Bug Section -->
-  <div id="bugSection" class="container hidden">
-    <p>NOMOR TARGET?</p>
-    <input type="text" id="targetNumber" placeholder="+62XXX"><br>
-    <p>Jenis Bug?</p>
-    <select id="bugVariant">
-      <option value="">-- Pilih Variant --</option>
-      <option>KIAMAT</option>
-      <option>DELAY-INV</option>
-      <option>BACKDOOR</option>
-      <option>DELAY-MAKER</option>
-      <option>CRASH-ANDROID</option>
-      <option>CRASH-IOS</option>
-      <option>PROTOC-V1</option>
-      <option>PROTOC-V2</option>
-      <option>PROTOC-SCP</option>
-      <option>SCP-INV</option>
-    </select><br>
-    <button onclick="sendBug()">SEND BUG</button>
-    <p class="note">HARAP TUNGGU 15 MENIT JIKA MELANGGAR KENA BLACKLIST!</p>
-  </div>
-
-  <!-- Popup -->
-  <div id="popup" class="popup hidden">
-    <p id="popupMessage"></p>
-    <div id="loading" class="loading hidden">Loading...</div>
-    <button class="close-btn" onclick="closePopup()">X</button>
+  <div class="center" id="main-page" style="display:none;">
+    <h1 class="title">TZRYRVSP VVIP</h1>
+    <div class="main-box">
+      <div class="profile">
+        <img src="https://i.ibb.co/0s8sq0f/avatar.png" alt="avatar">
+        <div>Role: <b>OWNER</b> · Exp: 2028-05-22</div>
+      </div>
+      <input type="text" id="target" placeholder="e.g. +62xxxxxxxxxx">
+      <select id="bug-variant">
+        <option value="">-- Select Bug --</option>
+        <option>Crash Infinity</option>
+        <option>Delay Invisible</option>
+        <option>IOS Crash</option>
+      </select>
+      <button class="btn" onclick="sendBug()">SEND BUG</button>
+      <p class="small-text">Harap tunggu 15 menit jika melanggar kena blacklist!</p>
+    </div>
   </div>
 
   <script>
-    function showPopup(msg, withLoading=false, doneMsg="") {
-      document.getElementById("popupMessage").innerText = msg;
-      document.getElementById("popup").classList.remove("hidden");
-      if (withLoading) {
-        document.getElementById("loading").classList.remove("hidden");
-        setTimeout(() => {
-          document.getElementById("loading").classList.add("hidden");
-          document.getElementById("popupMessage").innerText = doneMsg;
-        }, 3000);
-      }
-    }
-
-    function closePopup() {
-      document.getElementById("popup").classList.add("hidden");
-    }
-
     function login() {
       const user = document.getElementById("username").value;
       const pass = document.getElementById("password").value;
       if (user === "TZRYRVSP_VVIP" && pass === "ROLE_OWN") {
-        showPopup("SUCCESSFULLY LOGIN WAITING...");
+        alert("SUCCESSFULLY LOGIN WAITING...");
         setTimeout(() => {
-          closePopup();
-          document.getElementById("loginSection").classList.add("hidden");
-          document.getElementById("bugSection").classList.remove("hidden");
-        }, 5000);
+          document.getElementById("login-page").style.display = "none";
+          document.getElementById("main-page").style.display = "flex";
+        }, 2000);
       } else {
-        showPopup("USER ATAU PW NYA SALAH YAA... :)");
+        alert("USER ATAU PW NYA SALAH YAA... :)");
       }
     }
 
     function sendBug() {
-      const number = document.getElementById("targetNumber").value.trim();
-      const variant = document.getElementById("bugVariant").value;
-
-      if (!number.match(/^\+?\d+$/)) {
-        showPopup("ngasal ya?");
-        return;
-      }
-      if (number.length > 17) {
-        showPopup("kepanjangan brooo🤣");
-        return;
-      }
+      const target = document.getElementById("target").value;
+      const variant = document.getElementById("bug-variant").value;
       if (!variant) {
-        showPopup("PILIH VARIANT NYA YA SAYANGG :)");
+        alert("PILIH VARIANT NYA YA SAYANGG :)");
         return;
       }
-      showPopup("SEND BUG TO (" + number + ") JENIS BUGNYA (" + variant + ")", true, 
-        "DONE SEND BUG TO (" + number + ")!");
+      if (target.length < 8) {
+        alert("ngasal ya?");
+        return;
+      }
+      alert("SEND BUG TO " + target + " JENIS BUGNYA " + variant);
+      setTimeout(() => {
+        alert("DONE SEND BUG TO " + target + " !");
+      }, 2000);
     }
   </script>
 </body>
