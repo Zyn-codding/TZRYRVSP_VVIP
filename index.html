@@ -6,146 +6,238 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #000;
-      color: #fff;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(270deg, #ff00cc, #3333ff, #00ffcc, #ff3300);
+      background-size: 800% 800%;
+      animation: neonBG 20s ease infinite;
+      color: red;
+      text-align: center;
     }
-
-    .center {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      min-height: 100vh;
+    @keyframes neonBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-
-    h1.title {
-      font-size: 22px;
+    h1 {
+      color: #00f;
+      margin-top: 20px;
+      text-shadow: 0 0 10px #00f, 0 0 20px #00f;
+    }
+    .rainbow {
       font-weight: bold;
-      color: #6a5acd;
-      margin-bottom: 20px;
-    }
-
-    .login-box, .main-box {
-      background: #111;
-      border: 2px solid #6a0dad;
-      border-radius: 12px;
-      padding: 20px;
-      width: 300px;
-      text-align: center;
-      box-shadow: 0 0 15px #8000ff;
-    }
-
-    .login-box input, .main-box input, .main-box select {
-      width: 90%;
+      font-size: 20px;
+      background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
       margin: 10px 0;
-      padding: 10px;
-      border: 1px solid #6a0dad;
-      border-radius: 8px;
-      background: #000;
-      color: #fff;
-      text-align: center;
-      outline: none;
+      animation: rainbowAnim 3s linear infinite;
     }
-
-    .btn {
-      background: #6a0dad;
+    @keyframes rainbowAnim {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+    .card {
+      background: rgba(0,0,0,0.7);
+      border: 1px solid #444;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 10px;
+      width: 320px;
+      box-shadow: 0 0 15px #00f, 0 0 30px #f0f;
+    }
+    input, select, button {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
       border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
+      font-size: 14px;
+    }
+    input, select {
+      background: #111;
+      color: red;
+      border: 1px solid #444;
+    }
+    button {
+      background: #00f;
       color: #fff;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 10px;
       transition: 0.2s;
     }
-
-    .btn:hover {
-      background: #9932cc;
+    button:hover {
+      opacity: 0.9;
+      box-shadow: 0 0 10px #00f, 0 0 20px #0ff;
     }
-
-    .profile {
-      margin-bottom: 20px;
+    .notif {
+      margin-top: 10px;
+      font-size: 14px;
     }
-
-    .profile img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 3px solid #6a0dad;
-      margin-bottom: 10px;
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      background: #111;
+      color: #fff;
+      padding: 20px;
+      border: 2px solid #00f;
+      border-radius: 10px;
+      width: 280px;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 0 20px #00f, 0 0 40px #f0f;
     }
-
-    .small-text {
+    .popup .close-btn {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      background: #f00;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .loading-bar {
+      margin-top: 15px;
+      height: 6px;
+      width: 100%;
+      background: #333;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .loading-bar-inner {
+      height: 100%;
+      width: 0%;
+      background: #0f0;
+      animation: loading 3s forwards;
+    }
+    @keyframes loading {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+    .warning {
       font-size: 12px;
-      color: #aaa;
+      margin-top: 5px;
+      color: orange;
     }
   </style>
 </head>
 <body>
-  <div class="center" id="login-page">
-    <h1 class="title">TZRYRVSP VVIP</h1>
-    <div class="login-box">
-      <div class="profile">
-        <img src="https://i.ibb.co/0s8sq0f/avatar.png" alt="avatar">
-      </div>
-      <input type="text" id="username" placeholder="Username">
-      <input type="password" id="password" placeholder="Password">
-      <button class="btn" onclick="login()">LOGIN</button>
-    </div>
+  <h1>TZRYRVSP VVIP</h1>
+  <div class="rainbow">DEVELOPERS ZYN</div>
+
+  <!-- LOGIN CARD -->
+  <div id="loginCard" class="card">
+    <h2>LOGIN</h2>
+    <input type="text" id="username" placeholder="USERNAME">
+    <input type="password" id="password" placeholder="PASSWORD">
+    <button id="loginBtn">LOGIN</button>
+    <div id="loginNotif" class="notif"></div>
   </div>
 
-  <div class="center" id="main-page" style="display:none;">
-    <h1 class="title">TZRYRVSP VVIP</h1>
-    <div class="main-box">
-      <div class="profile">
-        <img src="https://i.ibb.co/0s8sq0f/avatar.png" alt="avatar">
-        <div>Role: <b>OWNER</b> · Exp: 2028-05-22</div>
-      </div>
-      <input type="text" id="target" placeholder="e.g. +62xxxxxxxxxx">
-      <select id="bug-variant">
-        <option value="">-- Select Bug --</option>
-        <option>Crash Infinity</option>
-        <option>Delay Invisible</option>
-        <option>IOS Crash</option>
-      </select>
-      <button class="btn" onclick="sendBug()">SEND BUG</button>
-      <p class="small-text">Harap tunggu 15 menit jika melanggar kena blacklist!</p>
-    </div>
+  <!-- MAIN CARD -->
+  <div id="mainCard" class="card" style="display:none;">
+    <h3>NOMOR TARGET?</h3>
+    <input type="text" id="targetNumber" placeholder="Contoh: +6281234567890">
+    
+    <h3>Jenis Bug?</h3>
+    <select id="bugType">
+      <option value="">-- PILIH VARIANT --</option>
+      <option>KIAMAT</option>
+      <option>DELAY-INV</option>
+      <option>BACKDOOR</option>
+      <option>DELAY-MAKER</option>
+      <option>CRASH-ANDROID</option>
+      <option>CRASH-IOS</option>
+      <option>PROTOC-V1</option>
+      <option>PROTOC-V2</option>
+      <option>PROTOC-SCP</option>
+      <option>SCP-INV</option>
+    </select>
+
+    <button id="sendBtn">SEND BUG</button>
+    <div id="mainNotif" class="notif"></div>
+    <div class="warning">HARAP TUNGGU 15 MENIT JIKA MELANGGAR KENA BLACKLIST!</div>
   </div>
+
+  <!-- POPUP -->
+  <div id="popup" class="popup">
+    <div id="popupContent"></div>
+    <div class="loading-bar"><div class="loading-bar-inner"></div></div>
+    <button class="close-btn" onclick="closePopup()">X</button>
+  </div>
+
+  <!-- AUDIO -->
+  <audio autoplay loop>
+    <source src="monolog.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
-    function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-      if (user === "TZRYRVSP_VVIP" && pass === "ROLE_OWN") {
-        alert("SUCCESSFULLY LOGIN WAITING...");
-        setTimeout(() => {
-          document.getElementById("login-page").style.display = "none";
-          document.getElementById("main-page").style.display = "flex";
-        }, 2000);
-      } else {
-        alert("USER ATAU PW NYA SALAH YAA... :)");
-      }
+    const loginBtn = document.getElementById("loginBtn");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const loginNotif = document.getElementById("loginNotif");
+    const loginCard = document.getElementById("loginCard");
+    const mainCard = document.getElementById("mainCard");
+    const targetNumber = document.getElementById("targetNumber");
+    const bugType = document.getElementById("bugType");
+    const sendBtn = document.getElementById("sendBtn");
+    const mainNotif = document.getElementById("mainNotif");
+    const popup = document.getElementById("popup");
+    const popupContent = document.getElementById("popupContent");
+
+    function showNotif(el, msg, color="red") {
+      el.style.color = color;
+      el.textContent = msg;
+      setTimeout(()=>{ el.textContent=""; },3000);
     }
 
-    function sendBug() {
-      const target = document.getElementById("target").value;
-      const variant = document.getElementById("bug-variant").value;
-      if (!variant) {
+    function closePopup(){
+      popup.style.display="none";
+    }
+
+    loginBtn.addEventListener("click", ()=>{
+      const user = usernameInput.value.trim();
+      const pass = passwordInput.value.trim();
+      if(user==="TZRYRVSP_VVIP" && pass==="ROLE_OWN"){
+        showNotif(loginNotif,"SUCCESSFULLY LOGIN WAITING...","lime");
+        setTimeout(()=>{
+          loginCard.style.display="none";
+          mainCard.style.display="block";
+        },5000);
+      }else{
+        showNotif(loginNotif,"USER ATAU PW NYA SALAH YAA... :)","red");
+      }
+    });
+
+    sendBtn.addEventListener("click", ()=>{
+      const number = targetNumber.value.trim();
+      const variant = bugType.value;
+      if(!number){
+        alert("ISI NOMOR DULU YA :)");
+        return;
+      }
+      if(number.length>17){
+        alert("kepanjangan brooo🤣");
+        return;
+      }
+      if(!variant){
         alert("PILIH VARIANT NYA YA SAYANGG :)");
         return;
       }
-      if (target.length < 8) {
+      if(/^[0-9]+$/.test(number) && !number.startsWith("+")){
         alert("ngasal ya?");
         return;
       }
-      alert("SEND BUG TO " + target + " JENIS BUGNYA " + variant);
-      setTimeout(() => {
-        alert("DONE SEND BUG TO " + target + " !");
-      }, 2000);
-    }
+      popupContent.innerHTML = `SEND BUG TO (${number})<br>JENIS BUGNYA (${variant})`;
+      popup.style.display="block";
+      setTimeout(()=>{
+        popupContent.innerHTML = `DONE SEND BUG TO (${number}) !`;
+      },3000);
+    });
   </script>
 </body>
 </html>
